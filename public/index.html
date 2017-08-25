@@ -1,31 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<link rel="stylesheet" type="text/css" href="style.css"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<title>Jujhar's Bikes</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" type="text/css" href="style.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <title>Jujhar's Bikes</title>
 
-<style></style>
+  <style></style>
 </head>
 
 <body>
 
-<!-- Headline -->
-<div class="container">
-  <header>
-    <h1>Jujhar's Bikes</h1>
-    <h2>Wheels for all occasions</h2>
-  </header>
-  <div id="blurb">
-    <p>browse and sort the following to your heart's content...</p>
+  <!-- Headline -->
+  <div class="container">
+    <header>
+      <h1>Jujhar's Bikes</h1>
+      <h2>Wheels for all occasions</h2>
+    </header>
+    <div id="blurb">
+      <p>browse and sort the following to your heart's content...</p>
+    </div>
   </div>
-</div>
 
-<div>
-
-</div>
+  <div class="table">
+    <table id="bikeTable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          image
+        </th>
+        <th>
+          description
+        </th>
+        <th>
+          class
+        </th>
+      </tr>
+    </table>
+  </div>
 
 
 </body>
@@ -37,7 +52,15 @@ $(document).ready(function () {
   //display bike data table
   var bikeData = "https://raw.githubusercontent.com/jujhars13/jujhars13/master/bikes.json";
   $.get(bikeData, function (data) {
+    var dataJSON = $.parseJSON(data)
     console.log(data);
+    dataJSON.items.forEach(function(bike){
+      $('#bikeTable tr:last').after('<tr><td>'+bike.name+'</td><td><img  src="'+bike.image.thumb+'"/></td><td>'+bike.description+'</td><td>'+bike.class+'</td></tr>');
+      console.log(bike)
+    })
+    //$(".table").html(data)
+
+
   });
 
 });
